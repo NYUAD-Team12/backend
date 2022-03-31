@@ -26,7 +26,6 @@ class SkillApi(Resource):
     def post(self):
         data = request.get_json()
         nos = int(data['level'])
-        
 
 
         course = Course.objects(name=name).first()
