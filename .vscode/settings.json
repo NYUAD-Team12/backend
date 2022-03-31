@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/5355ceea-110e-43d2-bbc9-5498b8d354b2/resourceGroups/anushkrishnav_group/providers/Microsoft.Web/sites/nyuad-12",
+    "appService.deploySubpath": "."
+}
