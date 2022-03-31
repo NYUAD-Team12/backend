@@ -3,7 +3,7 @@ from  Main.DAC.dbconfig import db
 class Skill(db.Document):
     skill_name = db.StringField( unique=True)
     skill_description = db.StringField()
-    skill_level = db.IntField()
+    priority = db.IntField()
     def __repr__(self):
         return '<Skill {}>'.format(self.skill_name)
 

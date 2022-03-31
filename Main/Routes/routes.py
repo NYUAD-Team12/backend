@@ -1,7 +1,6 @@
 from Main.api.userapi import UserApi, UsersApi, UserImageApi, Checkemail
 from Main.api.authapi import SignupApi, LoginApi
-from Main.api.skill import SkillApi, Projects
-
+from Main.api.skill import SkillApi, Projects, UserProjectsAPI
 
 def initialize_routes(api):
     # List users
@@ -16,4 +15,5 @@ def initialize_routes(api):
     # Skills
     api.add_resource(SkillApi, '/api/skill')
     api.add_resource(Projects, '/api/project')
+    api.add_resource(UserProjectsAPI, '/api/user/project')
 

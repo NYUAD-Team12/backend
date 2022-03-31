@@ -2,8 +2,10 @@
 from flask import Flask, Response, request,  jsonify
 from flask_restful import Resource
 import json
+from flask_jwt_extended import jwt_required, get_jwt_identity
 import pandas as pd
 from Main.Model.Skill import Skill, Project
+from Main.Model.UserProjects import UserProjects
 from Main.Model.User import User
 
 
@@ -16,12 +18,12 @@ class SkillApi(Resource):
             data.append({
                 "skill_name": skills[i].skill_name,
                 "skill_description": skills[i].skill_description,
-                "skill_level": skills[i].skill_level,
+                "priority": skills[i].priority,
             })
         return Response(json.dumps(data), mimetype='application/json')
     def post(self):
         data = request.get_json()
-        nos = int(data['skill_level'])
+        nos = int(data['priority'])
         skill = Skill(**data).save()
 
         return {'Response:': 'Skill added sucessfully !!'}, 200
@@ -33,7 +35,10 @@ class SkillApi(Resource):
 
 
 class Projects(Resource):
+    @jwt_required()
     def post(self):
+        username = get_jwt_identity()
+        user = User.objects(username=username).first()
         body = request.get_json()
         name = body.pop('project_name')
         skill_name = body.pop('skills')
@@ -45,6 +50,7 @@ class Projects(Resource):
         body['project_name']=name
         print(body)
         project = Project(**body).save()
+        UserProjects(User=user, Project=project, Status=0).save()
         return {'Response:': 'Project added sucessfully !!'}, 200
     
     def get(self):
@@ -65,6 +71,29 @@ class Projects(Resource):
         project.delete()
         return {'Response:': 'Project deleted sucessfully !!'}, 200
 
-        
+class UserProjectsAPI(Resource):
+    
+    @jwt_required()
+    def get(self):
+        username = get_jwt_identity()
+        print(username)
+        user = User.objects(username=username).first()
+        user_projects = UserProjects.objects(User__in=[user.id]).all()
+
+        data = []        
+        for i in user_projects:
+            project = i.Project
+            skill = project.skills
+            skill_list = []
+            for i in skill:
+                skill_list.append(i.skill_name)
+
+            data.append({
+                "project_name": project.project_name,
+                "project_description": project.project_description,
+                "project_reward": project.project_reward,
+                "skills": skill_list,
+            })
+        return Response(json.dumps(data), mimetype='application/json')
 
     
