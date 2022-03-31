@@ -15,8 +15,10 @@ api = Api(app)
 CORS(app, resources=r'/api/*',allow_headers=[
     "Content-Type", "Authorization", "Access-Control-Allow-Methods"])
 #CORS(app)
+DB = "mongodb+srv://AnushAdmin:29M0UfeC1YZvEMjr@cluster0.0p0ix.mongodb.net/nyu"
+
 app.config['MONGODB_SETTINGS'] = {
-    'host': os.environ["DB"]
+    'host': DB
 }
 jwt = JWTManager(app)
 
