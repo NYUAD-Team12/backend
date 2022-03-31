@@ -16,6 +16,5 @@ class Project(db.Document):
     project_description = db.StringField( unique=True)
     project_reward = db.IntegerField()
     skills = db.ListField(db.ReferenceField('Skill', reverse_delete_rule=db.PULL))
-    
     def __repr__(self):
         return '<project {}>'.format(self.project_name)
