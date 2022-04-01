@@ -19,7 +19,7 @@ class Quantumapi(Resource):
             job_dict[i.project_name] = (10, i.skills)
         print(job_dict)
         print(volunteer_dict)
-        alocation = main(volunteer_dict, job_dict, False)
+        alocation = main(volunteer_dict, job_dict)
         return Response(json.dumps(alocation), mimetype='application/json')
 
 
