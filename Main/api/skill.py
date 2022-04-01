@@ -36,7 +36,8 @@ class SkillApi(Resource):
 
 class Projects(Resource):
     def post(self):
-        username = request.get_json()['username']
+        data = request.get_json()
+        username = data.pop('username')
         user = User.objects(username=username).first()
         body = request.get_json()
         name = body.pop('project_name')
@@ -73,7 +74,8 @@ class Projects(Resource):
 class UserProjectsAPI(Resource):
     
     def get(self):
-        username = request.get_json()["username"]
+        data = request.get_json()
+        username = data.pop('username')
         print(username)
         user = User.objects(username=username).first()
         user_projects = UserProjects.objects(User__in=[user.id]).all()
