@@ -1,11 +1,19 @@
 import requests
 data = {
     "username": "admin",
-    "project_name": "1234567",
-    "project_description": "1234567",
-    "project_reward": "1234567",
-    "skills": ["beingcool"]
+    "project_name": "123aa7",
+    "project_description": "12aa37",
+    "project_reward": 1267,
+    "skills": ["beingcool"],
+    "priority": [1]
 }
-base = "http://127.0.0.1:5000/api/project"
-res = requests.post(base, json = data)
+base = "http://127.0.0.1:5000/api/"
+base2 = "https://resq-api.azurewebsites.net/api/"
+res = requests.post(base+'project', json = data)
 print(res.json())
+# skill = {
+#     "skill_name": "beingcool",
+#     "skill_description": "beingcool",
+# }
+# res = requests.post(base + 'skill', json = skill)
+# print(res.json())

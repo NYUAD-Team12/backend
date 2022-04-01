@@ -18,12 +18,10 @@ class SkillApi(Resource):
             data.append({
                 "skill_name": skills[i].skill_name,
                 "skill_description": skills[i].skill_description,
-                "priority": skills[i].priority,
             })
         return Response(json.dumps(data), mimetype='application/json')
     def post(self):
         data = request.get_json()
-        nos = int(data['priority'])
         skill = Skill(**data).save()
 
         return {'Response:': 'Skill added sucessfully !!'}, 200
@@ -93,6 +91,7 @@ class UserProjectsAPI(Resource):
                 "project_description": project.project_description,
                 "project_reward": project.project_reward,
                 "skills": skill_list,
+                "priority": project.priority,
             })
         return Response(json.dumps(data), mimetype='application/json')
 
