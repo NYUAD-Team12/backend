@@ -35,9 +35,8 @@ class SkillApi(Resource):
 
 
 class Projects(Resource):
-    @jwt_required()
     def post(self):
-        username = get_jwt_identity()
+        username = request.get_json()['username']
         user = User.objects(username=username).first()
         body = request.get_json()
         name = body.pop('project_name')
@@ -73,9 +72,8 @@ class Projects(Resource):
 
 class UserProjectsAPI(Resource):
     
-    @jwt_required()
     def get(self):
-        username = get_jwt_identity()
+        username = request.get_json()["username"]
         print(username)
         user = User.objects(username=username).first()
         user_projects = UserProjects.objects(User__in=[user.id]).all()
