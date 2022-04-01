@@ -1,5 +1,6 @@
 from flask import Flask, Response, request, send_file
 from flask_mongoengine import json
+from Main.Model.Volunteer import VUser
 from Main.Model.User import User
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -7,30 +8,24 @@ import json
 
 class UsersApi(Resource):
   
-  def get(self,username):
-    #check if user exsist
-    user = User.objects(username=username).first()
-    if user:
-      return Response("0")
-    else:
-      return Response("1")  
+  def get(self):
+    # get all users
+    users = VUser.objects.all()
+    leng = len(users) 
+    data = []
+    for i in range(leng):
+      data.append({
+        "username": users[i].username,
+        "email": users[i].email,
+        "name": users[i].name,
+        "skills": users[i].skills,
+      })
+    return Response(json.dumps(data), mimetype='application/json')
   
-  def post(self,username):
-    body = request.get_json()
-    user = User(**body).save()
-    id = user.id
+  def post(self):
+    body = request.get_json()    
+    user = VUser(**body).save()
     return {'id': str(id)}, 200
-
-class Checkemail(Resource):
-
-  def get(self,email):
-    user = User.objects(email=email).first()
-    print(user)
-    if user:
-        return Response("1")
-    else:
-        return Response("0")  
-
   
 
 class UserApi(Resource):
