@@ -23,9 +23,9 @@ class UsersApi(Resource):
     return Response(json.dumps(data), mimetype='application/json')
   
   def post(self):
-    body = request.get_json()    
+    body = request.get_json()   
     user = VUser(**body).save()
-    return {'id': str(id)}, 200
+    return {'user': user.username}, 200
   
 
 class UserApi(Resource):
