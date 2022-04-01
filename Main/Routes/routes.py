@@ -1,7 +1,7 @@
 from Main.api.userapi import UserApi, UsersApi, UserImageApi
 from Main.api.authapi import SignupApi, LoginApi
 from Main.api.skill import SkillApi, Projects, UserProjectsAPI
-from Main.api.quantumapi import Quantumapi
+# from Main.api.quantumapi import Quantumapi
 
 def initialize_routes(api):
     # List users
@@ -17,5 +17,5 @@ def initialize_routes(api):
     api.add_resource(Projects, '/api/project')
     api.add_resource(UserProjectsAPI, '/api/user/project')
     # Quantum
-    api.add_resource(Quantumapi, '/api/quantum/sim')
+    # api.add_resource(Quantumapi, '/api/quantum/sim')
 
