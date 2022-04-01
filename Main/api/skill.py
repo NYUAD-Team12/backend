@@ -16,7 +16,7 @@ class SkillApi(Resource):
         data = []
         for i in range(leng):
             data.append({
-                "skill_name": skills[i].skill_name,
+                "skill_name": skills[i].skill_name.to_lower(),
                 "skill_description": skills[i].skill_description,
             })
         return Response(json.dumps(data), mimetype='application/json')

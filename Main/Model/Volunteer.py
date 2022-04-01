@@ -3,7 +3,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 
 class VUser(db.Document):
     username = db.StringField(required=True, unique=True)
-    email = db.StringField(required=True, unique=True)
+    email = db.StringField(required=True)
     name = db.StringField()
     skills = db.DictField()
 

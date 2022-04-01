@@ -25,11 +25,12 @@ base2 = "https://resq-api.azurewebsites.net/api/"
 # print(res.json())
 
 data = {
-    "username": "vol3",
-    "email": "vol3@gmail.com",
-    "name": "vol3",
+    "username": "vol5",
+    "email": "vol5@gmail.com",
+    "name": "vol5",
     "skills": {"beingcool":1}
 }
-res = requests.post(base + 'vol', json = data)
-# res = requests.get(base + 'vol')
+import json
+# res = requests.post(base2 + 'vol', json = data)
+res = requests.get(base2 + 'vol')
 print(res.json())
