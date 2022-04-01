@@ -22,7 +22,6 @@ class SkillApi(Resource):
         return Response(json.dumps(data), mimetype='application/json')
     def post(self):
         data = request.get_json()
-        data['skill_name'] = str(data['skill_name']).lower()
         skill = Skill(**data).save()
 
         return {'Response:': 'Skill added sucessfully !!'}, 200
