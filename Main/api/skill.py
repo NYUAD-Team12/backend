@@ -16,12 +16,13 @@ class SkillApi(Resource):
         data = []
         for i in range(leng):
             data.append({
-                "skill_name": skills[i].skill_name.to_lower(),
+                "skill_name": str(skills[i].skill_name).to_lower(),
                 "skill_description": skills[i].skill_description,
             })
         return Response(json.dumps(data), mimetype='application/json')
     def post(self):
         data = request.get_json()
+        data['skill_name'] = str(data['skill_name']).lower()
         skill = Skill(**data).save()
 
         return {'Response:': 'Skill added sucessfully !!'}, 200
@@ -38,15 +39,6 @@ class Projects(Resource):
         username = data.pop('username')
         user = User.objects(username=username).first()
         body = request.get_json()
-        name = body.pop('project_name')
-        skill_name = body.pop('skills')
-
-        skill_list = []
-        for i  in skill_name:
-            skill_list.append(Skill.objects(skill_name=i).first())
-        body['skills'] = skill_list
-        body['project_name']=name
-        print(body)
         project = Project(**body).save()
         UserProjects(User=user, Project=project, Status=0).save()
         return {'Response:': 'Project added sucessfully !!'}, 200
@@ -77,21 +69,16 @@ class UserProjectsAPI(Resource):
         print(username)
         user = User.objects(username=username).first()
         user_projects = UserProjects.objects(User__in=[user.id]).all()
-
+        print(user_projects)
         data = []        
         for i in user_projects:
             project = i.Project
-            skill = project.skills
-            skill_list = []
-            for i in skill:
-                skill_list.append(i.skill_name)
 
             data.append({
                 "project_name": project.project_name,
                 "project_description": project.project_description,
                 "project_reward": project.project_reward,
-                "skills": skill_list,
-                "priority": project.priority,
+                "skills": project.skills,
             })
         return Response(json.dumps(data), mimetype='application/json')
 

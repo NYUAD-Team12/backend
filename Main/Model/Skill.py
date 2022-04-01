@@ -12,7 +12,6 @@ class Project(db.Document):
     project_name = db.StringField( unique=True)
     project_description = db.StringField()
     project_reward = db.IntField()
-    skills = db.ListField(db.ReferenceField('Skill', reverse_delete_rule=db.PULL))
-    priority = db.ListField(db.IntField())
+    skills = db.DictField()
     def __repr__(self):
         return '<project {}>'.format(self.project_name)

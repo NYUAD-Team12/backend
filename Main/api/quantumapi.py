@@ -13,7 +13,10 @@ class Quantapi(Resource):
         volunteer_dict = {}
         for i in volunteers:
             volunteer_dict[i.username] = i.skills
-        projects = Project.objects.all()
+        jobs = Project.objects.all()
+        job_dict = {}
+        for i in jobs:
+            job_dict[i.project_name] = i.skills
         return volunteer_dict
 
 
