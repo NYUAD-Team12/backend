@@ -31,5 +31,5 @@ data = {
     "skills": {"beingcool":1}
 }
 # res = requests.post(base + 'vol', json = data)
-res = requests.get(base + 'vol')
+res = requests.get(base2 + 'vol')
 print(res.json())
