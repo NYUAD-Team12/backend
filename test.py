@@ -9,17 +9,21 @@ import requests
 #     } 
 # #     }
 base = "http://127.0.0.1:5000/api/"
-base2 = "https://resq-api.azurewebsites.net/api/"
-# # res = requests.post(base+'project', json = data)
-# # print(res.json())
-# skill = {
-#     "skill_name": "Cleaning",
-#     "skill_description": "clean",
-# # }
-# res = requests.post(base + 'skill', json = skill)
+# base2 = "https://resq-api.azurewebsites.net/api/"
+# # # res = requests.post(base+'project', json = data)
+# # # print(res.json())
+
+# skilll = ['Vehicle Operation', "Nursing", "Reparing", "Cleaning"]
+# des = ["Drive", "Clean", "Repair", "Clean"]
+# for i  in range(4):
+#     skill = {
+#         "skill_name": skilll[i],
+#         "skill_description": des[i],
+#     }
+#     res = requests.post(base + 'skill', json = skill)
+#     print(res.json())
+# res = requests.get(base2 +  'skill')
 # print(res.json())
-res = requests.get(base +  'skill')
-print(res.json())
 
 # # data = {
 # #     "username": "nyudemo"
@@ -37,5 +41,5 @@ print(res.json())
 # res = requests.get(base + 'vol')
 # print(res.json())
 
-# res = requests.get(base + 'quantum/sim')
-# print(res.json())
+res = requests.get(base + 'quantum/sim')
+print(res.json())

@@ -12,14 +12,12 @@ class Quantumapi(Resource):
         volunteer_dict = {}
         for i in volunteers:
             volunteer_dict[i.username] = i.skills
-        print(volunteer_dict)
         jobs = Project.objects.all()
         job_dict = {}
         for i in jobs:
             job_dict[i.project_name] = (10, i.skills)
-        print(job_dict)
-        print(volunteer_dict)
         alocation = main(volunteer_dict, job_dict)
+        print("flag")
         return Response(json.dumps(alocation), mimetype='application/json')
 
 
